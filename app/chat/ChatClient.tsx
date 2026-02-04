@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { io, Socket } from "socket.io-client";
 
 type Message = {
   _id: string;
@@ -22,27 +21,24 @@ export default function ChatClient({ userId, userName, peerName, chatId }: ChatC
   const [messages, setMessages] = useState<Message[]>([]);
   const [text, setText] = useState("");
   const [loggingOut, setLoggingOut] = useState(false);
-  const socketRef = useRef<Socket | null>(null);
+  const pollRef = useRef<NodeJS.Timeout | null>(null);
   const endRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const socket = io();
-    socketRef.current = socket;
+    const load = async () => {
+      const res = await fetch(`/api/chats/${chatId}/messages`, { cache: "no-store" });
+      if (!res.ok) return;
+      const data = await res.json();
+      setMessages(data.messages ?? []);
+    };
 
-    socket.emit("join", { chatId });
-
-    socket.on("history", (history: Message[]) => {
-      setMessages(history);
-    });
-
-    socket.on("message", (message: Message) => {
-      setMessages((prev) => [...prev, message]);
-    });
+    load();
+    pollRef.current = setInterval(load, 1500);
 
     return () => {
-      socket.disconnect();
+      if (pollRef.current) clearInterval(pollRef.current);
     };
-  }, []);
+  }, [chatId]);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -51,11 +47,14 @@ export default function ChatClient({ userId, userName, peerName, chatId }: ChatC
   const handleSend = () => {
     const trimmed = text.trim();
     if (!trimmed) return;
-    socketRef.current?.emit("message", {
-      chatId,
-      text: trimmed,
-      senderId: userId,
-      senderName: userName,
+    fetch(`/api/chats/${chatId}/messages`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        text: trimmed,
+        senderId: userId,
+        senderName: userName,
+      }),
     });
     setText("");
   };
