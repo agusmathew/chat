@@ -17,7 +17,7 @@ export default async function ChatPage({ params }: PageProps) {
   }
 
   await connectMongo();
-  const chat = await Chat.findById(chatId).lean();
+  const chat = await Chat.findById(chatId);
   if (!chat) {
     redirect("/users");
   }

@@ -19,13 +19,10 @@ export async function POST(request: Request) {
 
   await connectMongo();
   const participants = [currentUser.id, targetId].sort();
-  let chat = await Chat.findOne({ participants }).lean();
-  if (!chat) {
-    chat = await Chat.create({ participants });
-  }
+  const existingChat = await Chat.findOne({ participants });
+  const chatId = existingChat
+    ? existingChat._id.toString()
+    : (await Chat.create({ participants }))._id.toString();
 
-  return NextResponse.redirect(
-    new URL(`/chat/${chat._id.toString()}`, request.url),
-    303
-  );
+  return NextResponse.redirect(new URL(`/chat/${chatId}`, request.url), 303);
 }
