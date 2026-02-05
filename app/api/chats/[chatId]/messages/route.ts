@@ -39,7 +39,7 @@ export async function POST(request: Request, { params }: RouteParams) {
     senderName,
   });
 
-  const chat = await Chat.findById(chatId).lean();
+  const chat = await Chat.findById(chatId);
   const participants = (chat?.participants ?? []).filter(
     (userId: string) => userId && userId !== senderId
   );
