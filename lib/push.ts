@@ -15,9 +15,12 @@ webpush.setVapidDetails(subject, publicKey, privateKey);
 export async function sendPushToUsers(userIds: string[], payload: Record<string, unknown>) {
   if (userIds.length === 0) return;
   await connectMongo();
-  const subs = await PushSubscription.find({ userId: { $in: userIds } }).lean();
+  const subs = (await PushSubscription.find({ userId: { $in: userIds } }).lean()) as unknown as Array<{
+    endpoint: string;
+    keys: { p256dh: string; auth: string };
+  }>;
   await Promise.all(
-    subs.map(async (sub: { endpoint: string; keys: { p256dh: string; auth: string } }) => {
+    subs.map(async (sub) => {
       try {
         await webpush.sendNotification(sub, JSON.stringify(payload));
       } catch (error) {
