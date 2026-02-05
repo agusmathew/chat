@@ -7,6 +7,7 @@ export default function SignupPage() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
@@ -19,7 +20,7 @@ export default function SignupPage() {
     const res = await fetch("/api/auth/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify({ name, email, password, avatarUrl }),
     });
     if (!res.ok) {
       setError(await res.text());
@@ -66,6 +67,19 @@ export default function SignupPage() {
               type="email"
               autoComplete="email"
               required
+            />
+          </label>
+          <label className="flex flex-col gap-2">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
+              Profile photo URL
+            </span>
+            <input
+              value={avatarUrl}
+              onChange={(event) => setAvatarUrl(event.target.value)}
+              className="rounded-xl border border-[var(--line)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--foreground)]"
+              placeholder="https://..."
+              type="url"
+              autoComplete="url"
             />
           </label>
           <label className="flex flex-col gap-2">

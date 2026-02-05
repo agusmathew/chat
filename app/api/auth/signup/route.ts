@@ -11,6 +11,7 @@ export async function POST(request: Request) {
   const name = String(body.name ?? "").trim();
   const email = String(body.email ?? "").trim().toLowerCase();
   const password = String(body.password ?? "");
+  const avatarUrl = String(body.avatarUrl ?? "").trim();
 
   if (!name || !email || !password) {
     return new Response("Missing fields", { status: 400 });
@@ -24,7 +25,7 @@ export async function POST(request: Request) {
   }
 
   const passwordHash = await bcrypt.hash(password, 10);
-  const user = await User.create({ name, email, passwordHash });
+  const user = await User.create({ name, email, passwordHash, avatarUrl: avatarUrl || undefined });
 
   const cookieStore = await cookies();
   cookieStore.set("uid", user._id.toString(), {
@@ -33,5 +34,12 @@ export async function POST(request: Request) {
     path: "/",
   });
 
-  return Response.json({ user: { id: user._id.toString(), name: user.name, email: user.email } });
+  return Response.json({
+    user: {
+      id: user._id.toString(),
+      name: user.name,
+      email: user.email,
+      avatarUrl: user.avatarUrl ?? "",
+    },
+  });
 }

@@ -10,7 +10,12 @@ export async function getCurrentUser() {
   await connectMongo();
   const user = await User.findById(userId).lean();
   if (!user) return null;
-  return { id: user._id.toString(), name: user.name, email: user.email };
+  return {
+    id: user._id.toString(),
+    name: user.name,
+    email: user.email,
+    avatarUrl: user.avatarUrl ?? "",
+  };
 }
 
 export async function getAllUsers() {
@@ -20,5 +25,6 @@ export async function getAllUsers() {
     id: user._id.toString(),
     name: user.name,
     email: user.email,
+    avatarUrl: user.avatarUrl ?? "",
   }));
 }

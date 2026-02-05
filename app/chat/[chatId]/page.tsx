@@ -41,7 +41,9 @@ export default async function ChatPage({ params }: PageProps) {
     <ChatClient
       userId={currentUser.id}
       userName={currentUser.name}
+      userAvatarUrl={currentUser.avatarUrl ?? ""}
       peerName={otherUser.name}
+      peerAvatarUrl={otherUser.avatarUrl ?? ""}
       chatId={chat._id.toString()}
     />
   );

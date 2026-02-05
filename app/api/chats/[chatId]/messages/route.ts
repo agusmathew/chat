@@ -1,5 +1,7 @@
 import connectMongo from "../../../../../lib/mongodb";
 import Message from "../../../../../models/Message";
+import Chat from "../../../../../models/Chat";
+import { sendPushToUsers } from "../../../../../lib/push";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -36,5 +38,16 @@ export async function POST(request: Request, { params }: RouteParams) {
     senderId,
     senderName,
   });
+
+  const chat = await Chat.findById(chatId).lean();
+  const participants = (chat?.participants ?? []).filter(
+    (userId: string) => userId && userId !== senderId
+  );
+  await sendPushToUsers(participants, {
+    title: `New message from ${senderName}`,
+    body: text,
+    chatId,
+  });
+
   return Response.json({ message });
 }
