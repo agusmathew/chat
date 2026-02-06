@@ -37,6 +37,12 @@ export default async function AppHeader() {
                   Users
                 </a>
                 <a
+                  href="/posts"
+                  className="block rounded-xl px-3 py-2 text-xs transition hover:bg-[var(--surface-soft)] hover:text-emerald-600"
+                >
+                  Posts
+                </a>
+                <a
                   href="/profile"
                   className="block rounded-xl px-3 py-2 text-xs transition hover:bg-[var(--surface-soft)] hover:text-emerald-600"
                 >
