@@ -15,6 +15,9 @@ export async function getCurrentUser() {
     name: user.name,
     email: user.email,
     avatarUrl: user.avatarUrl ?? "",
+    likedUserIds: user.likedUserIds ?? [],
+    dislikedUserIds: user.dislikedUserIds ?? [],
+    blockedUserIds: user.blockedUserIds ?? [],
   };
 }
 
@@ -26,5 +29,8 @@ export async function getAllUsers() {
     name: user.name,
     email: user.email,
     avatarUrl: user.avatarUrl ?? "",
+    likedUserIds: user.likedUserIds ?? [],
+    dislikedUserIds: user.dislikedUserIds ?? [],
+    blockedUserIds: user.blockedUserIds ?? [],
   }));
 }

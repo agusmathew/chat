@@ -23,8 +23,9 @@ export async function sendPushToUsers(userIds: string[], payload: Record<string,
     subs.map(async (sub) => {
       try {
         await webpush.sendNotification(sub, JSON.stringify(payload));
+        console.log("Push sent to", sub.endpoint);
       } catch (error) {
-        // Ignore invalid subscriptions
+        console.error("Push failed for", sub.endpoint, error);
       }
     })
   );
