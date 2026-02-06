@@ -51,6 +51,8 @@ export default async function UsersPage() {
             const isOutgoing = outgoingPending.has(user.id);
             const isIncoming = incomingPending.has(user.id);
             const isDisliked = dislikedSet.has(user.id);
+            const lastActiveAt = user.lastActiveAt ? new Date(user.lastActiveAt).getTime() : 0;
+            const isOnline = lastActiveAt > 0 && Date.now() - lastActiveAt < 2 * 60 * 1000;
             const cardTone = isLiked
               ? "border-[var(--card-border)] bg-[var(--card-liked)]"
               : isDisliked
@@ -101,7 +103,16 @@ export default async function UsersPage() {
                     </span>
                   ) : null}
                   <div className="absolute bottom-4 left-4">
-                    <p className="text-lg font-semibold text-white">{user.name}</p>
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`h-2.5 w-2.5 rounded-full ${
+                          isOnline ? "bg-emerald-400" : "bg-slate-400"
+                        }`}
+                        aria-label={isOnline ? "Online" : "Offline"}
+                        title={isOnline ? "Online" : "Offline"}
+                      />
+                      <p className="text-lg font-semibold text-white">{user.name}</p>
+                    </div>
                     <p className="text-xs text-white/70">{user.email}</p>
                   </div>
                 </div>

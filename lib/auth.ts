@@ -18,6 +18,7 @@ export async function getCurrentUser() {
     likedUserIds: user.likedUserIds ?? [],
     dislikedUserIds: user.dislikedUserIds ?? [],
     blockedUserIds: user.blockedUserIds ?? [],
+    lastActiveAt: user.lastActiveAt ?? null,
   };
 }
 
@@ -32,5 +33,6 @@ export async function getAllUsers() {
     likedUserIds: user.likedUserIds ?? [],
     dislikedUserIds: user.dislikedUserIds ?? [],
     blockedUserIds: user.blockedUserIds ?? [],
+    lastActiveAt: user.lastActiveAt ?? null,
   }));
 }

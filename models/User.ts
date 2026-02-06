@@ -9,6 +9,7 @@ export type UserDocument = {
   likedUserIds?: string[];
   dislikedUserIds?: string[];
   blockedUserIds?: string[];
+  lastActiveAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -22,6 +23,7 @@ const UserSchema = new Schema<UserDocument>(
     likedUserIds: { type: [String], required: false, default: [] },
     dislikedUserIds: { type: [String], required: false, default: [] },
     blockedUserIds: { type: [String], required: false, default: [] },
+    lastActiveAt: { type: Date, required: false },
   },
   { timestamps: true }
 );

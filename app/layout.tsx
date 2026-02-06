@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import AppHeader from "./components/AppHeader";
+import PresencePing from "./components/PresencePing";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body className={`${inter.variable} antialiased`}>
         <div className="min-h-screen">
           <AppHeader />
+          <PresencePing />
           <div className="pt-14">{children}</div>
         </div>
       </body>
