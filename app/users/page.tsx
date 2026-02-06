@@ -21,14 +21,15 @@ export default async function UsersPage() {
             const isCurrent = user.id === currentUser.id;
             const isLiked = likedSet.has(user.id);
             const isDisliked = dislikedSet.has(user.id);
+            const cardTone = isLiked
+              ? "border-rose-300/70 bg-rose-50/50 ring-1 ring-rose-200"
+              : isDisliked
+              ? "border-amber-300/70 bg-amber-50/40 ring-1 ring-amber-200"
+              : "border-[var(--line)] bg-[var(--surface)]";
             return (
               <div
                 key={user.id}
-                className={`group relative flex flex-col overflow-hidden rounded-[32px] border text-sm shadow-sm transition hover:-translate-y-1 hover:shadow-md ${
-                  isLiked
-                    ? "border-emerald-300/60 bg-emerald-50/40 ring-1 ring-emerald-200"
-                    : "border-[var(--line)] bg-[var(--surface)]"
-                }`}
+                className={`group relative flex flex-col overflow-hidden rounded-[32px] border text-sm shadow-sm transition hover:-translate-y-1 hover:shadow-md ${cardTone}`}
               >
                 <div className="relative h-72 w-full overflow-hidden bg-[var(--surface-soft)]">
                   {user.avatarUrl ? (
@@ -49,8 +50,12 @@ export default async function UsersPage() {
                       You
                     </span>
                   ) : isLiked ? (
-                    <span className="absolute left-4 top-4 rounded-full bg-emerald-500 px-3 py-1 text-xs font-semibold text-white">
+                    <span className="absolute left-4 top-4 rounded-full bg-rose-500 px-3 py-1 text-xs font-semibold text-white">
                       Liked
+                    </span>
+                  ) : isDisliked ? (
+                    <span className="absolute left-4 top-4 rounded-full bg-amber-500 px-3 py-1 text-xs font-semibold text-white">
+                      Disliked
                     </span>
                   ) : null}
                   <div className="absolute bottom-4 left-4">
@@ -83,10 +88,20 @@ export default async function UsersPage() {
                         <input type="hidden" name="action" value={isLiked ? "unlike" : "like"} />
                         <button
                           type="submit"
-                          className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-3 py-2 text-xs font-medium text-[var(--muted)] transition hover:border-emerald-400 hover:text-emerald-500"
+                          className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-medium transition ${
+                            isLiked
+                              ? "border-rose-300 text-rose-500 hover:border-rose-400 hover:text-rose-600"
+                              : "border-[var(--line)] text-[var(--muted)] hover:border-rose-300 hover:text-rose-500"
+                          }`}
                         >
                           <span className="inline-flex h-3.5 w-3.5 items-center justify-center">
-                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2">
+                            <svg
+                              viewBox="0 0 24 24"
+                              className="h-3.5 w-3.5"
+                              fill={isLiked ? "currentColor" : "none"}
+                              stroke="currentColor"
+                              strokeWidth="2"
+                            >
                               <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
                             </svg>
                           </span>
