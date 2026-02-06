@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Simple Chat",
+  title: "Chatbook",
   description: "A simple WhatsApp-like chat using websockets and MongoDB.",
 };
 
