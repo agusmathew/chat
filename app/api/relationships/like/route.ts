@@ -24,7 +24,10 @@ export async function POST(request: Request) {
   if (action === "unlike") {
     await User.findByIdAndUpdate(currentUser.id, { $pull: { likedUserIds: targetId } });
   } else {
-    await User.findByIdAndUpdate(currentUser.id, { $addToSet: { likedUserIds: targetId } });
+    await User.findByIdAndUpdate(currentUser.id, {
+      $addToSet: { likedUserIds: targetId },
+      $pull: { dislikedUserIds: targetId },
+    });
   }
 
   return NextResponse.redirect(new URL("/users", request.url), 303);

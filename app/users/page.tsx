@@ -117,12 +117,24 @@ export default async function UsersPage() {
                         />
                         <button
                           type="submit"
-                          className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-3 py-2 text-xs font-medium text-[var(--muted)] transition hover:border-amber-300 hover:text-amber-600"
+                          className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-medium transition ${
+                            isDisliked
+                              ? "border-amber-300 text-amber-700 hover:border-amber-400"
+                              : "border-[var(--line)] text-[var(--muted)] hover:border-amber-300 hover:text-amber-600"
+                          }`}
                         >
-                          <span className="inline-flex h-3.5 w-3.5 items-center justify-center">
-                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2">
-                              <path d="M10 14l4-4" />
-                              <path d="M4 10h6l3-6 3 6h4" />
+                          <span className="inline-flex h-4 w-4 items-center justify-center">
+                            <svg
+                              viewBox="0 0 24 24"
+                              className="h-4 w-4"
+                              fill={isDisliked ? "currentColor" : "none"}
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M7 10v10a2 2 0 0 0 2 2h5.3a2 2 0 0 0 1.94-1.52L18 14V6a2 2 0 0 0-2-2H9.5a1 1 0 0 0-.97.76L7 10z" />
+                              <path d="M4 10H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2" />
                             </svg>
                           </span>
                           {isDisliked ? "Disliked" : "Dislike"}
