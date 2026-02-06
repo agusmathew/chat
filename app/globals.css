@@ -64,3 +64,30 @@ button:disabled {
   cursor: not-allowed;
   opacity: 0.7;
 }
+
+button[data-loading="true"] {
+  position: relative;
+}
+
+button[data-loading="true"] > * {
+  opacity: 0;
+}
+
+button[data-loading="true"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 2px solid var(--foreground);
+  border-top-color: transparent;
+  animation: button-spin 0.7s linear infinite;
+}
+
+@keyframes button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

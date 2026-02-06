@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import AppHeader from "./components/AppHeader";
 import PresencePing from "./components/PresencePing";
+import ButtonSpinner from "./components/ButtonSpinner";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -25,6 +26,7 @@ export default function RootLayout({
         <div className="min-h-screen">
           <AppHeader />
           <PresencePing />
+          <ButtonSpinner />
           <div className="pt-14">{children}</div>
         </div>
       </body>
