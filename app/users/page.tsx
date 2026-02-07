@@ -62,9 +62,9 @@ export default async function UsersPage() {
             return (
               <div
                 key={user.id}
-                className={`group relative flex flex-col overflow-visible rounded-3xl border-2 text-sm ${cardTone}`}
+                className={`group relative flex flex-col overflow-visible rounded-[28px] border-2 text-sm shadow-[var(--shadow-soft)] transition hover:-translate-y-1 ${cardTone}`}
               >
-                <div className="relative h-64 w-full overflow-hidden rounded-t-3xl bg-[var(--surface-soft)]">
+                <div className="relative h-64 w-full overflow-hidden rounded-t-[28px] bg-[var(--surface-soft)]">
                   {user.avatarUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -77,37 +77,37 @@ export default async function UsersPage() {
                       {user.name.slice(0, 1).toUpperCase()}
                     </div>
                   )}
-                  <div className="absolute inset-0 rounded-t-3xl bg-gradient-to-t from-black/45 via-black/10 to-transparent" />
+                  <div className="absolute inset-0 rounded-t-[28px] bg-gradient-to-t from-black/40 via-black/5 to-transparent" />
                   {isCurrent ? (
-                    <span className="absolute right-4 top-4 rounded-full bg-[var(--accent)] px-3 py-1 text-xs font-semibold text-black">
+                    <span className="absolute right-4 top-4 rounded-full bg-[var(--accent)] px-3 py-1 text-xs font-semibold text-black shadow-[0_6px_16px_rgba(110,231,183,0.35)]">
                       You
                     </span>
                   ) : isFriended ? (
-                    <span className="absolute left-4 top-4 rounded-full bg-sky-500 px-3 py-1 text-xs font-semibold text-white">
+                    <span className="absolute left-4 top-4 rounded-full bg-[#d7f4ff] px-3 py-1 text-xs font-semibold text-[#2b5b73] backdrop-blur">
                       Friend
                     </span>
                   ) : isOutgoing ? (
-                    <span className="absolute left-4 top-4 rounded-full bg-slate-600 px-3 py-1 text-xs font-semibold text-white">
+                    <span className="absolute left-4 top-4 rounded-full bg-[#e7e9f2] px-3 py-1 text-xs font-semibold text-[#525a6b] backdrop-blur">
                       Requested
                     </span>
                   ) : isIncoming ? (
-                    <span className="absolute left-4 top-4 rounded-full bg-amber-500 px-3 py-1 text-xs font-semibold text-white">
+                    <span className="absolute left-4 top-4 rounded-full bg-[#fff0c2] px-3 py-1 text-xs font-semibold text-[#7a5b1b] backdrop-blur">
                       Request
                     </span>
                   ) : isLiked ? (
-                    <span className="absolute left-4 top-4 rounded-full bg-rose-500 px-3 py-1 text-xs font-semibold text-white">
+                    <span className="absolute left-4 top-4 rounded-full bg-[#ffd6e7] px-3 py-1 text-xs font-semibold text-[#6f2a49] backdrop-blur">
                       Liked
                     </span>
                   ) : isDisliked ? (
-                    <span className="absolute left-4 top-4 rounded-full bg-amber-500 px-3 py-1 text-xs font-semibold text-white">
+                    <span className="absolute left-4 top-4 rounded-full bg-[#ffe6c7] px-3 py-1 text-xs font-semibold text-[#7a4a12] backdrop-blur">
                       Disliked
                     </span>
                   ) : null}
                   <div className="absolute bottom-4 left-4">
                     <div className="flex items-center gap-2">
                       <span
-                        className={`h-2.5 w-2.5 rounded-full ${
-                          isOnline ? "bg-emerald-400" : "bg-slate-400"
+                        className={`h-2.5 w-2.5 rounded-full ring-2 ring-white/80 ${
+                          isOnline ? "bg-emerald-400" : "bg-slate-300"
                         }`}
                         aria-label={isOnline ? "Online" : "Offline"}
                         title={isOnline ? "Online" : "Offline"}
@@ -127,7 +127,7 @@ export default async function UsersPage() {
                         <input type="hidden" name="targetId" value={user.id} />
                         <button
                           type="submit"
-                          className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-4 py-2 text-xs font-semibold text-black transition hover:brightness-95"
+                          className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-4 py-2 text-xs font-semibold text-black transition hover:shadow-[0_10px_20px_rgba(110,231,183,0.35)]"
                           title="Chat"
                           aria-label="Chat"
                         >
@@ -145,11 +145,12 @@ export default async function UsersPage() {
                           type="submit"
                           className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-medium transition ${
                             isLiked
-                              ? "border-rose-300 text-rose-600"
-                              : "border-[var(--line)] text-[var(--muted)]"
+                              ? "border-rose-200 text-[#6f2a49] shadow-[0_8px_20px_rgba(247,179,209,0.35)]"
+                              : "border-[var(--line)] text-[var(--muted)] hover:shadow-[0_8px_18px_rgba(247,179,209,0.25)]"
                           }`}
                           title={isLiked ? "Liked" : "Like"}
                           aria-label={isLiked ? "Liked" : "Like"}
+                          data-no-spinner="true"
                         >
                           <span className="inline-flex h-3.5 w-3.5 items-center justify-center">
                             <svg
@@ -176,8 +177,8 @@ export default async function UsersPage() {
                             type="submit"
                             className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-medium transition ${
                               isOutgoing
-                                ? "border-slate-400 text-slate-600"
-                                : "border-[var(--line)] text-[var(--muted)]"
+                                ? "border-slate-300 text-slate-600"
+                                : "border-[var(--line)] text-[var(--muted)] hover:shadow-[0_8px_18px_rgba(148,163,184,0.2)]"
                             }`}
                             title={isOutgoing ? "Cancel request" : "Add friend"}
                             aria-label={isOutgoing ? "Cancel request" : "Add friend"}
@@ -208,7 +209,7 @@ export default async function UsersPage() {
                             <input type="hidden" name="action" value="accept" />
                             <button
                               type="submit"
-                              className="inline-flex items-center gap-2 rounded-full border border-emerald-300 px-3 py-2 text-xs font-medium text-emerald-600 transition"
+                              className="inline-flex items-center gap-2 rounded-full border border-emerald-200 px-3 py-2 text-xs font-medium text-emerald-600 transition hover:shadow-[0_8px_18px_rgba(110,231,183,0.3)]"
                               title="Accept friend"
                               aria-label="Accept friend"
                             >
@@ -224,7 +225,7 @@ export default async function UsersPage() {
                             <input type="hidden" name="action" value="decline" />
                             <button
                               type="submit"
-                              className="inline-flex items-center gap-2 rounded-full border border-red-300 px-3 py-2 text-xs font-medium text-red-600 transition"
+                              className="inline-flex items-center gap-2 rounded-full border border-red-200 px-3 py-2 text-xs font-medium text-red-600 transition hover:shadow-[0_8px_18px_rgba(248,113,113,0.25)]"
                               title="Decline friend"
                               aria-label="Decline friend"
                             >
@@ -249,11 +250,12 @@ export default async function UsersPage() {
                           type="submit"
                           className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-medium transition ${
                             isDisliked
-                              ? "border-amber-300 text-amber-700"
-                              : "border-[var(--line)] text-[var(--muted)]"
+                              ? "border-amber-200 text-[#7a4a12] shadow-[0_8px_20px_rgba(255,225,168,0.4)]"
+                              : "border-[var(--line)] text-[var(--muted)] hover:shadow-[0_8px_18px_rgba(252,211,77,0.25)]"
                           }`}
                           title={isDisliked ? "Disliked" : "Dislike"}
                           aria-label={isDisliked ? "Disliked" : "Dislike"}
+                          data-no-spinner="true"
                         >
                           <span className="inline-flex h-4 w-4 items-center justify-center">
                             <svg

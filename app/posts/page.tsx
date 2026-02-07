@@ -37,7 +37,7 @@ export default async function PostsPage() {
             return (
               <article
                 key={post._id.toString()}
-                className="overflow-hidden rounded-3xl border-2 border-[var(--card-border)] bg-[var(--surface)]"
+                className="overflow-hidden rounded-[28px] border-2 border-[var(--card-border)] bg-[var(--surface)] shadow-[var(--shadow-soft)]"
               >
                 <div className="flex items-center gap-3 border-b border-[var(--line)] px-5 py-4">
                   <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-[var(--line)] bg-[var(--surface-soft)] text-xs font-semibold text-[var(--muted)]">
@@ -59,16 +59,16 @@ export default async function PostsPage() {
                     </p>
                   </div>
                 </div>
-                <div className="bg-[var(--surface-soft)]">
+                <div className="bg-[var(--surface-soft)] p-2">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={post.imageUrl}
                     alt={post.caption || "Post image"}
-                    className="h-[420px] w-full object-cover"
+                    className="h-[420px] w-full rounded-[20px] object-cover"
                   />
                 </div>
                 {post.caption ? (
-                  <p className="px-5 py-4 text-sm">{post.caption}</p>
+                  <p className="px-5 py-4 text-sm text-[var(--foreground)]">{post.caption}</p>
                 ) : null}
               </article>
             );

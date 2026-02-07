@@ -31,10 +31,14 @@ export default function SignupForm() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[var(--background)] px-4">
+    <div className="relative flex min-h-screen items-center justify-center bg-[var(--background)] px-4">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -top-24 left-1/3 h-72 w-72 rounded-full bg-[radial-gradient(circle_at_30%_30%,rgba(110,231,183,0.35),rgba(110,231,183,0)_70%)]" />
+        <div className="absolute bottom-[-120px] right-[-60px] h-80 w-80 rounded-full bg-[radial-gradient(circle_at_30%_30%,rgba(247,179,209,0.35),rgba(247,179,209,0)_70%)]" />
+      </div>
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-sm rounded-3xl border border-[var(--line)] bg-[var(--surface)] p-7 shadow-sm"
+        className="relative w-full max-w-sm rounded-[28px] border-2 border-[var(--line)] bg-[var(--surface)] p-7 shadow-[var(--shadow-soft)]"
       >
         <div className="mb-4 flex items-center justify-between">
           <h1 className="text-2xl font-semibold">Create account</h1>
@@ -52,7 +56,7 @@ export default function SignupForm() {
             <input
               value={name}
               onChange={(event) => setName(event.target.value)}
-              className="rounded-xl border border-[var(--line)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--foreground)]"
+              className="rounded-[18px] border border-[var(--line)] bg-[var(--surface-soft)] px-3 py-2 text-sm text-[var(--foreground)]"
               placeholder="Your name"
               autoComplete="name"
               required
@@ -65,7 +69,7 @@ export default function SignupForm() {
             <input
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              className="rounded-xl border border-[var(--line)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--foreground)]"
+              className="rounded-[18px] border border-[var(--line)] bg-[var(--surface-soft)] px-3 py-2 text-sm text-[var(--foreground)]"
               placeholder="you@example.com"
               type="email"
               autoComplete="email"
@@ -80,7 +84,7 @@ export default function SignupForm() {
               <input
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                className="flex-1 rounded-xl border border-[var(--line)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--foreground)]"
+                className="flex-1 rounded-[18px] border border-[var(--line)] bg-[var(--surface-soft)] px-3 py-2 text-sm text-[var(--foreground)]"
                 placeholder="At least 6 characters"
                 type={showPassword ? "text" : "password"}
                 autoComplete="new-password"
@@ -89,7 +93,7 @@ export default function SignupForm() {
               <button
                 type="button"
                 onClick={() => setShowPassword((prev) => !prev)}
-                className="rounded-full border border-[var(--line)] px-3 py-2 text-xs text-[var(--muted)]"
+                className="rounded-full border border-[var(--line)] bg-[var(--surface-soft)] px-3 py-2 text-xs text-[var(--muted)]"
               >
                 {showPassword ? "Hide" : "Show"}
               </button>
@@ -101,7 +105,7 @@ export default function SignupForm() {
 
         <button
           disabled={loading}
-          className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-black disabled:opacity-60"
+          className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-black shadow-[0_10px_20px_rgba(110,231,183,0.35)] disabled:opacity-60"
         >
           <span className="inline-flex h-4 w-4 items-center justify-center">
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 import AppHeader from "./components/AppHeader";
 import PresencePing from "./components/PresencePing";
 import ButtonSpinner from "./components/ButtonSpinner";
 
-const inter = Inter({
-  variable: "--font-inter",
+const manrope = Manrope({
+  variable: "--font-manrope",
+  weight: ["400", "600", "700"],
   subsets: ["latin"],
 });
 
@@ -22,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased`}>
+      <body className={`${manrope.variable} antialiased`}>
         <div className="min-h-screen">
           <AppHeader />
           <PresencePing />

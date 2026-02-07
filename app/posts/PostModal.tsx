@@ -12,7 +12,7 @@ export default function PostModal() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[var(--accent)] text-black transition hover:brightness-95"
+          className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[var(--accent)] text-black shadow-[0_10px_20px_rgba(110,231,183,0.35)] transition hover:brightness-95"
           aria-label="Create post"
           title="Create post"
         >
@@ -36,7 +36,7 @@ export default function PostModal() {
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--line)] bg-[var(--surface)] text-[var(--foreground)] transition hover:border-red-300 hover:text-red-500"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--line)] bg-[var(--surface)] text-[var(--foreground)] shadow-[var(--shadow-soft)] transition hover:border-red-300 hover:text-red-500"
                 aria-label="Close"
               >
                 <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">

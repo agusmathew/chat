@@ -94,7 +94,7 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-[var(--background)] px-6 py-10">
-      <div className="mx-auto w-full max-w-3xl rounded-3xl border border-[var(--line)] bg-[var(--surface)] p-8 shadow-sm">
+      <div className="mx-auto w-full max-w-3xl rounded-[28px] border-2 border-[var(--line)] bg-[var(--surface)] p-8 shadow-[var(--shadow-soft)]">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl font-semibold">Your profile</h1>
@@ -106,8 +106,8 @@ export default function ProfilePage() {
         </div>
 
         <form onSubmit={handleSave} className="mt-8 space-y-6">
-          <div className="flex flex-col items-center gap-4 rounded-3xl border border-[var(--line)] bg-[var(--surface-soft)] p-6 sm:flex-row">
-            <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border border-[var(--line)] bg-white text-3xl font-semibold text-[var(--muted)]">
+          <div className="flex flex-col items-center gap-4 rounded-[20px] border border-[var(--line)] bg-[var(--surface-soft)] p-6 sm:flex-row">
+            <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border border-[var(--line)] bg-[var(--surface)] text-3xl font-semibold text-[var(--muted)]">
               {avatarUrl ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -134,7 +134,7 @@ export default function ProfilePage() {
               ) : null}
             </div>
           </div>
-          <div className="rounded-3xl border border-[var(--line)] bg-[var(--surface-soft)] p-6">
+          <div className="rounded-[20px] border border-[var(--line)] bg-[var(--surface-soft)] p-6">
             <div className="mb-4 flex items-center justify-between">
               <div>
                 <p className="text-sm font-semibold">Profile preview</p>
@@ -145,8 +145,8 @@ export default function ProfilePage() {
               <span className="text-xs text-[var(--muted)]">Preview</span>
             </div>
             <div className="max-w-sm">
-              <div className="flex flex-col overflow-hidden rounded-[32px] border border-[var(--line)] bg-[var(--surface)] text-sm shadow-sm">
-                <div className="relative h-72 w-full overflow-hidden bg-[var(--surface-soft)]">
+              <div className="flex flex-col overflow-hidden rounded-[28px] border border-[var(--line)] bg-[var(--surface)] text-sm shadow-[var(--shadow-soft)]">
+                <div className="relative h-72 w-full overflow-hidden rounded-t-[28px] bg-[var(--surface-soft)]">
                   {avatarUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -159,7 +159,7 @@ export default function ProfilePage() {
                       {name ? name.slice(0, 1).toUpperCase() : "?"}
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
+                  <div className="absolute inset-0 rounded-t-[28px] bg-gradient-to-t from-black/40 via-black/5 to-transparent" />
                   <div className="absolute bottom-4 left-4">
                     <p className="text-lg font-semibold text-white">{name || "Your name"}</p>
                     <p className="text-xs text-white/70">{profile?.email ?? "you@example.com"}</p>
@@ -167,7 +167,7 @@ export default function ProfilePage() {
                 </div>
                 <div className="flex items-center justify-between px-5 py-4">
                   <span className="text-xs text-[var(--muted)]">This is your profile card.</span>
-                  <span className="rounded-full bg-[var(--accent)] px-4 py-2 text-xs font-semibold text-black">
+                  <span className="rounded-full bg-[var(--accent)] px-4 py-2 text-xs font-semibold text-black shadow-[0_10px_20px_rgba(110,231,183,0.35)]">
                     You
                   </span>
                 </div>
@@ -183,7 +183,7 @@ export default function ProfilePage() {
               <input
                 value={name}
                 onChange={(event) => setName(event.target.value)}
-                className="rounded-xl border border-[var(--line)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--foreground)]"
+                className="rounded-[18px] border border-[var(--line)] bg-[var(--surface-soft)] px-3 py-2 text-sm text-[var(--foreground)]"
               />
             </label>
             <label className="flex flex-col gap-2">
@@ -193,7 +193,7 @@ export default function ProfilePage() {
               <input
                 value={profile?.email ?? ""}
                 disabled
-                className="rounded-xl border border-[var(--line)] bg-[var(--surface-soft)] px-3 py-2 text-sm text-[var(--muted)]"
+                className="rounded-[18px] border border-[var(--line)] bg-[var(--surface-soft)] px-3 py-2 text-sm text-[var(--muted)]"
               />
             </label>
           </div>
@@ -202,7 +202,7 @@ export default function ProfilePage() {
             <button
               type="submit"
               disabled={saving}
-              className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2 text-sm font-semibold text-black disabled:opacity-60"
+              className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2 text-sm font-semibold text-black shadow-[0_10px_20px_rgba(110,231,183,0.35)] disabled:opacity-60"
             >
               <span className="inline-flex h-4 w-4 items-center justify-center">
                 <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
@@ -220,7 +220,7 @@ export default function ProfilePage() {
         </form>
         {cropOpen ? (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-6">
-            <div className="w-full max-w-2xl rounded-3xl bg-[var(--surface)] p-6 shadow-lg">
+            <div className="w-full max-w-2xl rounded-[28px] bg-[var(--surface)] p-6 shadow-[var(--shadow-soft)]">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-lg font-semibold">Crop your photo</p>
@@ -237,7 +237,7 @@ export default function ProfilePage() {
                 </button>
               </div>
               <div className="mt-6 flex items-center justify-center">
-                <div className="relative h-[360px] w-[360px] overflow-hidden rounded-3xl border border-[var(--line)] bg-black">
+                <div className="relative h-[360px] w-[360px] overflow-hidden rounded-[28px] border border-[var(--line)] bg-black">
                   <div
                     className="absolute inset-0"
                     onPointerDown={(event) => {

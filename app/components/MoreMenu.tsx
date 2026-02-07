@@ -25,7 +25,7 @@ export default function MoreMenu({ userId }: MoreMenuProps) {
     <div ref={rootRef} className="relative z-20">
       <button
         type="button"
-        className="rounded-full border border-[var(--line)] p-2 text-[var(--muted)] transition hover:border-red-300 hover:text-red-600"
+        className="rounded-full border border-[var(--line)] bg-[var(--surface-soft)] p-2 text-[var(--muted)] transition hover:border-red-300 hover:text-red-600"
         onClick={() => setOpen((value) => !value)}
         aria-label="More actions"
       >
